@@ -24,11 +24,19 @@ def get_xlsx(url):
         soup = BeautifulSoup(resp.content, 'html.parser')
         xls_list=[]
         for i in range(13):
-            xls_list.append(str(soup.find_all(class_="row wide-dwn-itm no-gutters")[i].find(class_="col-2").find_all('a')[0]).split('href="')[1].split('">')[0])
+            xls_list.append("https://bashesk.ru" + str(soup.find_all(class_="row wide-dwn-itm no-gutters")[i].find(class_="col-2").find_all('a')[0]).split('href="')[1].split('">')[0])
         return xls_list
 
+def get_file(url):
+    file = requests.get(url)
+    print(file.content)
+
+
 def main():
+    list = get_xlsx(site_url)
     print(get_xlsx(site_url))
+    get_file(list[0])
+
 
 
 if __name__ == "__main__":
