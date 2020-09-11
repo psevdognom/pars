@@ -15,7 +15,7 @@ url = "https://bashesk.ru/upload/iblock/f0f/ПУНЦЭМ_до 670кВт_октя
 #  		 	</div>
 #  		 </div>
 
-
+#https://bashesk.ru/corporate/tariffs/unregulated/limits/?sort_by=NAME&sort_order=asc&filter_name=&filter_date_from=01.07.2019&filter_date_to=01.07.2020
 site_url = "https://bashesk.ru/corporate/tariffs/unregulated/limits/?sort_by=NAME&sort_order=asc&filter_name=&filter_date_from=01.07.2019&filter_date_to=01.07.2020"
 
 def get_xlsx(url):
