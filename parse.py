@@ -1,5 +1,5 @@
 import requests
-
+import xlrd
 from bs4 import BeautifulSoup
 url = "https://bashesk.ru/upload/iblock/f0f/ПУНЦЭМ_до 670кВт_октябь  2019.xls"
 
@@ -18,7 +18,7 @@ url = "https://bashesk.ru/upload/iblock/f0f/ПУНЦЭМ_до 670кВт_октя
 #https://bashesk.ru/corporate/tariffs/unregulated/limits/?sort_by=NAME&sort_order=asc&filter_name=&filter_date_from=01.07.2019&filter_date_to=01.07.2020
 site_url = "https://bashesk.ru/corporate/tariffs/unregulated/limits/?sort_by=NAME&sort_order=asc&filter_name=&filter_date_from=01.07.2019&filter_date_to=01.07.2020"
 
-def get_xlsx(url):
+def gel_file_urls(url):
     with requests.Session() as session:
         resp = session.get(url)
         soup = BeautifulSoup(resp.content, 'html.parser')
@@ -29,12 +29,16 @@ def get_xlsx(url):
 
 def get_file(url):
     file = requests.get(url)
-    print(file.content)
+    a = open('files/{}.xls'.format(url.split('ПУНЦЭМ')[1]), 'w')
+    a.write(file.text)
+    a.close()
+    wb = xlrd.open_workbook('files/{}.xls'.format(url.split('ПУНЦЭМ')[1]), encoding_override="cp1251")
+    print(wb)
 
 
 def main():
-    list = get_xlsx(site_url)
-    print(get_xlsx(site_url))
+    list = gel_file_urls(site_url)
+    print(gel_file_urls(site_url))
     get_file(list[0])
 
 
