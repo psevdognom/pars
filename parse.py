@@ -1,5 +1,6 @@
 import requests
 import xlrd
+import pandas as pd
 from bs4 import BeautifulSoup
 url = "https://bashesk.ru/upload/iblock/f0f/ПУНЦЭМ_до 670кВт_октябь  2019.xls"
 
@@ -32,8 +33,9 @@ def get_file(url):
     a = open('files/{}.xls'.format(url.split('ПУНЦЭМ')[1]), 'w')
     a.write(file.text)
     a.close()
-    wb = xlrd.open_workbook('files/{}.xls'.format(url.split('ПУНЦЭМ')[1]), encoding_override="cp1251")
-    print(wb)
+    wb = pd.read_html('files/{}.xls'.format(url.split('ПУНЦЭМ')[1]))
+    df = pd.DataFrame(wb)
+    print(df.head())
 
 
 def main():
